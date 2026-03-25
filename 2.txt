@@ -1,2 +1,18 @@
 esep #2
-n=int(input))
+void function2(vector<int> arr) {
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = 0; j < arr.size(); j++) {
+            cout << arr[i] << " " << arr[j] << endl;
+        }
+    }
+}
+
+void function3(vector<int> arrA, vector<int> arrB) {
+    for (int i = 0; i < arrA.size(); i++) {
+        for (int j = 0; j < arrB.size(); j++) {
+            for (int k = 0; k < 1000000; k++) {
+                cout << arrA[i] << " " << arrB[j] << endl;
+            }
+        }
+    }
+}
