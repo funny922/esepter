@@ -1,1 +1,2 @@
 esep #2
+n=int(input))
