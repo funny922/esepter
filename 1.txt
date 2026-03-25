@@ -1,1 +1,2 @@
 esep #1
+n=int(input())
