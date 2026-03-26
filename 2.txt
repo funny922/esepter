@@ -1,1 +1,11 @@
-
+N = int(input())
+M = N - 1
+ans = 0
+a = 1
+while a <= M:
+    q = M // a
+    last = M // q
+    count = last - a + 1
+    ans += q * count
+    a = last + 1
+print(ans)
