@@ -1,1 +1,23 @@
-
+s = input().strip()
+MOD = 10**9 + 7
+n = len(s)
+L = int(s, 2)
+dp = [[0, 0] for _ in range(n + 1)]
+dp[0][1] = 1
+for i in range(n):
+    bit = int(s[i])
+    for tight in range(2):
+        if dp[i][tight] == 0:
+            continue
+        cur = dp[i][tight]
+        for ab, bb in [(0, 0), (0, 1), (1, 0)]:
+            sum_bit = ab | bb
+            if tight:
+                if sum_bit < bit:
+                    dp[i + 1][0] = (dp[i + 1][0] + cur) % MOD
+                elif sum_bit == bit:
+                    dp[i + 1][1] = (dp[i + 1][1] + cur) % MOD
+            else:
+                dp[i + 1][0] = (dp[i + 1][0] + cur) % MOD
+ans = (dp[n][0] + dp[n][1]) % MOD
+print(ans)
