@@ -1,4 +1,23 @@
 S = input().strip()
+mod = 2026
+n = len(S)
+cnt = [0] * mod
+cnt[0] = 1
+cur = 0
+p = 1
+ans = 0
+for i in range(n - 1, -1, -1):
+    digit = int(S[i])
+    cur = (cur + digit * p) % mod
+    if digit % 2 == 0:
+        ans += cnt[cur]
+    cnt[cur] += 1
+    p = (p * 10) % mod
+print(ans)
+
+#-------------------------Баскаша-шешылу-жолы------------------------------
+
+S = input().strip()
 n = len(S)
 MOD2 = 1013
 g, x = MOD2, 0
