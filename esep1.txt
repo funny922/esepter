@@ -1,2 +1,259 @@
+def task1():
+    def greet(name):
+        print(f"Hello, {name}! Welcome to Python.")
+
+    def calculate_area(length, width):
+        return length * width
+
+    def is_even(number):
+        return number % 2 == 0
+    
+    greet(input())
+    greet(input())
+    num1, num2 = map(int, input().split())
+    area1 = calculate_area(num1, num2)
+    num3, num4 = map(int, input().split())
+    area2 = calculate_area(num3, num4)
+    print(f"Area 1: {area1}, Area 2: {area2}")
+    num6, num7 = map(int, input().split())
+    print(f"Is {num6} even? {is_even(num6)}")
+    print(f"Is {num7} even? {is_even(num7)}")
+    
+def task2():
+    def introduce(name, age=18):
+        print(f"Name: {name}, age: {age}")
+    def sum_all(*args):
+        return sum(args)
+    def print_info(**kwargs):
+        for i, j in kwargs.items():
+            print(f"{i.capitalize()}: {j}")
+    introduce("Ernur")
+    introduce("Nursultan", 20)
+    lst = list(map(int, input().split()))
+    print(sum_all(*lst))
+    print_info(name = "Ernur", major = "Software Engineering", year = 1)
+
+def task3():
+    square = lambda x: x**2
+    print(square(5))
+    print(square(12))
+    scores = [45, 78, 92, 60, 55, 88, 71, 39]
+    bonus = list(map(lambda s: round(s * 1.1), scores))
+    print(f"Bonus: {bonus}")
+    flter = list(filter(lambda s: s >= 60, scores))
+    print(f"Scores >= 60: {flter}")
+    students = [("Ernur", 88), ("Akon", 92), ("Aigerym", 78), ("Ansar", 60)]
+    sorted_students = sorted(students, key=lambda student: student[1], reverse=True)
+    for name, grade in sorted_students:
+        print(f"{name}: {grade}")
+
+class Student:
+    def __init__(self, name, age, gpa):
+        self.name = name
+        self.age = age
+        self.gpa = gpa
+
+    def introduce(self):
+        print(f"Hi! I'm {self.name}, {self.age} years old, with a GPA of {self.gpa}.")
+
+    def is_honor_student(self):
+        return self.gpa >= 3.5
+
+def task4():
+    s1 = Student("Ernur", 20, 3.9)
+    s2 = Student("Nursultan", 21, 3.2)
+    s3 = Student("Dastan", 19, 3.6)
+
+    for s in [s1, s2, s3]:
+        s.introduce()
+        print(f"Honor Student: {s.is_honor_student()}\n")
+        
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited ${amount}. New balance: ${self.balance}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print(f"Insufficient funds! You only have ${self.balance}.")
+        elif amount <= 0:
+            print("Withdrawal amount must be positive.")
+        else:
+            self.balance -= amount
+            print(f"Withdrew ${amount}. Remaining balance: ${self.balance}")
+
+    def get_balance(self):
+        return self.balance
+
+    def __str__(self):
+        return f"Account Owner: {self.owner} | Current Balance: ${self.balance}"
+
+def task5():
+    acc1 = BankAccount("Ansar", 100)
+    acc2 = BankAccount("Ernur")
+
+    print(acc1)
+    acc1.deposit(50)
+    acc1.withdraw(30)
+    acc1.withdraw(200)
+
+    print("\n" + str(acc2))
+    acc2.deposit(500)
+    acc2.withdraw(150)
+
+class Animal:
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+
+    def speak(self):
+        print(f"{self.name} says {self.sound}")
+
+class Dog(Animal):
+    def __init__(self, name):
+        super().__init__(name, "Woof")
+
+    def speak(self):
+        print(f"{self.name} barks: {self.sound}!")
+
+    def fetch(self):
+        print(f"{self.name} fetches the ball!")
+
+class Cat(Animal):
+    def purr(self):
+        print(f"{self.name} purrs softly...")
+
+def task6():
+    my_dog = Dog("Rex")
+    my_cat = Cat("Alex", "Meow")
+    my_dog.speak()
+    my_dog.fetch()
+    my_cat.speak()
+    my_cat.purr()
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def remove_book(self, title):
+        self.books = [b for b in self.books if b.title != title]
+
+    def list_books(self):
+        for book in self.books:
+            print(f"'{book.title}' by {book.author}")
+
+    def search_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                return f"Found: {book.title} by {book.author}"
+        return "Book not found."
+
+def task7():
+    lib = Library()
+    lib.add_book(Book("1984", "George Orwell"))
+    lib.add_book(Book("The Hobbit", "J.R.R. Tolkien"))
+    lib.add_book(Book("Python Basics", "AI Guide"))
+    lib.add_book(Book("The Great Gatsby", "F. Scott Fitzgerald"))
+
+    lib.remove_book("1984")
+    print(lib.search_book("The Hobbit"))
+    lib.list_books()
+
+import math
+
+class Shape:
+    def area(self): return 0
+
+class Circle(Shape):
+    def __init__(self, radius): self.radius = radius
+    def area(self): return math.pi * (self.radius ** 2)
+    def __str__(self): return f"Circle (r={self.radius})"
+
+class Rectangle(Shape):
+    def __init__(self, w, h): self.w, self.h = w, h
+    def area(self): return self.w * self.h
+    def __str__(self): return f"Rectangle ({self.w}x{self.h})"
+
+class Triangle(Shape):
+    def __init__(self, b, h): self.b, self.h = b, h
+    def area(self): return 0.5 * self.b * self.h
+    def __str__(self): return f"Triangle (b={self.b}, h={self.h})"
+
+def task8():
+    shapes = [Circle(5), Rectangle(4, 6), Triangle(3, 8)]
+    for s in shapes:
+        print(f"{s} | Area: {s.area():.2f}")
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+class Student(Person):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+        self.grades = []
+
+    def add_grade(self, grade):
+        self.grades.append(grade)
+
+    def average_grade(self):
+        return sum(self.grades) / len(self.grades) if self.grades else 0
+
+    def is_passing(self):
+        return self.average_grade() >= 60
+
+class Classroom:
+    def __init__(self):
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def list_students(self):
+        for s in self.students:
+            print(f"{s.name}: Avg {s.average_grade():.1f}")
+
+    def top_student(self):
+        return max(self.students, key=lambda s: s.average_grade())
+
+def task9():
+    room = Classroom()
+    names = ["Ernur", "Ansar", "Nursultan", "Akon"]
+    for name in names:
+        s = Student(name, 20)
+        s.add_grade(80 if name != "Ansar" else 95) 
+        s.add_grade(85)
+        room.add_student(s)
+
+    print("Class List:")
+    room.list_students()
+    top = room.top_student()
+    print(f"\nTop Student: {top.name} with an average of {top.average_grade():.1f}")
+
+task1()
+task2()
+task3()
+task4()
+task5()
+task6()
+task7()
+task8()
+task9()
 
 
